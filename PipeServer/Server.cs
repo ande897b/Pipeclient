@@ -13,7 +13,7 @@ namespace PipeServer
         private StreamReader pipeReader;
         private bool running = true;
         private string input = string.Empty;
-
+        private Dictionary<string, Currency> currencies = new Dictionary<string, Currency>();
 
         public void Run(string pipeName)
         {
@@ -47,7 +47,30 @@ namespace PipeServer
         private bool ManageInput(string input)
         {
             Console.WriteLine("\nInput var " + input);
-            return !(input.ToUpper().Equals("EXIT"));
+           string[] test= input.Split(' ');
+            try
+            {
+                Currency currency = new Currency(test[0], int.Parse(test[1]));
+                currencies.Add(test[0], currency);
+                ShowCurrencies();
+                return !(input.ToUpper().Equals("EXIT"));
+            }
+            catch (Exception)
+            {
+
+                Console.WriteLine("fejl i input, indtast som følgende 'DKK 100'");
+                
+               
+            }
+            return true;
+        }
+        private void ShowCurrencies()
+        {
+            Console.WriteLine("\nValutakurser: ");
+            foreach (Currency c in currencies.Values)
+            {
+                Console.WriteLine($"{c.CountryCode}, {c.ExchangeRate}");
+            }
         }
 
 

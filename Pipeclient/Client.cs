@@ -28,7 +28,7 @@ namespace Pipeclient
                         Console.WriteLine("Indtast landekode og vekselskurs");
                         message = Console.ReadLine();
                         writer.WriteLine(message);
-                        Console.WriteLine($"\n {message} sendt til serveren du!");
+                        Console.WriteLine($"\n {message} sendt til serveren du!");                     
                     } while (message.ToUpper() != "EXIT");
 
                     
